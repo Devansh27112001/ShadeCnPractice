@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import AppSidebar from "@/components/AppSidebar";
+import NavBar from "@/components/NavBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,9 +27,16 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased flex`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased flex gap-3`}
       >
-        {children}
+        {/* This layout is the main layout. It will be rendered - visible on the screen no matter of the "/...." */}
+        {/* LEFT SIDE */}
+        <AppSidebar />
+        {/* RIGHT SIDE */}
+        <main className="w-full">
+          <NavBar />
+          <div className="px-4">{children}</div>
+        </main>
       </body>
     </html>
   );
