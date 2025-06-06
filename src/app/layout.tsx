@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import AppSidebar from "@/components/AppSidebar";
 import NavBar from "@/components/NavBar";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,14 +30,21 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased flex gap-3`}
       >
-        {/* This layout is the main layout. It will be rendered - visible on the screen no matter of the "/...." */}
-        {/* LEFT SIDE */}
-        <AppSidebar />
-        {/* RIGHT SIDE */}
-        <main className="w-full">
-          <NavBar />
-          <div className="px-4">{children}</div>
-        </main>
+        <ThemeProvider
+          attribute={"class"}
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {/* This layout is the main layout. It will be rendered - visible on the screen no matter of the "/...." */}
+          {/* LEFT SIDE */}
+          <AppSidebar />
+          {/* RIGHT SIDE */}
+          <main className="w-full">
+            <NavBar />
+            <div className="px-4">{children}</div>
+          </main>
+        </ThemeProvider>
       </body>
     </html>
   );
