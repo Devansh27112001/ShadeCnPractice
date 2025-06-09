@@ -1,10 +1,14 @@
 import {
   Calendar,
+  ChevronUp,
   Home,
   Inbox,
   LucideProps,
+  Plus,
+  Projector,
   Search,
   Settings,
+  User2,
 } from "lucide-react";
 import { FC } from "react";
 import {
@@ -12,15 +16,24 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
+  SidebarGroupAction,
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarSeparator,
 } from "./ui/sidebar";
 import Link from "next/link";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "./ui/dropdown-menu";
 
 export interface NavItem {
   title: string;
@@ -57,8 +70,9 @@ const items: NavItem[] = [
 
 const AppSidebar = () => {
   return (
-    <Sidebar>
-      <SidebarHeader>
+    <Sidebar collapsible="icon">
+      {/* HEADER */}
+      <SidebarHeader className="py-4">
         <SidebarMenu>
           <SidebarMenuItem>
             <SidebarMenuButton asChild>
@@ -73,7 +87,11 @@ const AppSidebar = () => {
           </SidebarMenuItem>
         </SidebarMenu>
       </SidebarHeader>
+      <SidebarSeparator />
+
+      {/* CONTENT */}
       <SidebarContent>
+        {/* GROUP 1 */}
         <SidebarGroup>
           <SidebarGroupLabel>Application</SidebarGroupLabel>
           <SidebarGroupContent>
@@ -91,8 +109,83 @@ const AppSidebar = () => {
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
+
+        {/* GROUP 2 */}
+        <SidebarGroup>
+          <SidebarGroupLabel>Projects</SidebarGroupLabel>
+          <SidebarGroupAction>
+            <Plus /> <span className="sr-only">Add project</span>
+          </SidebarGroupAction>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link href={"/#"}>
+                    <Projector />
+                    See all projects
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link href={"/#"}>
+                    <Plus />
+                    Add project
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        {/* GROUP 3 - collapsible */}
+        <SidebarGroup>
+          <SidebarGroupLabel>Collapsible</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link href={"/#"}>
+                    <Projector />
+                    See all projects
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild>
+                  <Link href={"/#"}>
+                    <Plus />
+                    Add project
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter></SidebarFooter>
+
+      {/* FOOTER */}
+      <SidebarFooter>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <DropdownMenu>
+              {/* TRIGGER */}
+              <DropdownMenuTrigger asChild>
+                <SidebarMenuButton>
+                  <User2 /> Devansh K. <ChevronUp className="ml-auto" />
+                </SidebarMenuButton>
+              </DropdownMenuTrigger>
+
+              {/* CONTENT */}
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem>Account</DropdownMenuItem>
+                <DropdownMenuItem>Settings</DropdownMenuItem>
+                <DropdownMenuItem>Sign out</DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarFooter>
     </Sidebar>
   );
 };
