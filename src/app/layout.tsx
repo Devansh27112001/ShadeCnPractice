@@ -41,7 +41,7 @@ export default async function RootLayout({
           disableTransitionOnChange
         >
           <SidebarProvider defaultOpen={defaultOpen}>
-            {/* This layout is the main layout. It will be rendered - visible on the screen no matter of the "/...." */}
+            {/* This layout is the main layout. It will be rendered - visible on the screen no matter of the "localhost:3000/...." */}
             {/* LEFT SIDE */}
             <AppSidebar />
             {/* RIGHT SIDE */}
